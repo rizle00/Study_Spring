@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -5,7 +6,10 @@
   Time: 오후 4:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!doctype html>
+
 <html>
 <head>
     <title>Title</title>
@@ -50,6 +54,11 @@
         <td>${vo.age}</td>
     </tr>
 </table>
-<input type="button" value="회원가입화면" onclick="location='member'">
+<input type="button" value="회원가입화면" onclick="go_join()">
 </body>
+<script>
+    function go_join(){
+        location= '<c:url value="/member"/>'
+    }
+</script>
 </html>
