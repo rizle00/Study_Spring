@@ -1,0 +1,13 @@
+select e.last_name||''||e.first_name name, e.*, d.department_name, j.job_title from employees e
+left outer join departments d on e.department_id = d.department_id
+inner join jobs j using(job_id);
+
+
+
+
+select employee_id, last_name, first_name, hire_date, department_id, department_name
+from employees e
+left outer join departments d using(department_id)
+left outer join jobs j using(job_id); -> 중복되는 조건을 이용 but alias를 사용하고 있으면 사용 불가
+
+ 조회할 사항 선택, 테이블 준비, 조회 조건, 정렬 순

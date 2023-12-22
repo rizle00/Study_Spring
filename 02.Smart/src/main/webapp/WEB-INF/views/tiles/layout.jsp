@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
 <!doctype html>
 
 <html>
@@ -9,8 +10,32 @@
 
 	<link rel="icon" type="image/x-icon" href="<c:url value='//img/hanul.ico' />" />
 	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="<c:url value='css/styles.css'/>" rel="stylesheet" />
-	<link href="<c:url value='css/common.css'/>" rel="stylesheet" />
+	<link href="<c:url value='/css/styles.css'/>" rel="stylesheet" />
+	<link href="<c:url value='/css/common.css'/>" rel="stylesheet" />
+	<%-- category : cu -> 고객관리
+				hr -> 사원관리...--%>
+	<c:choose>
+		<c:when test="${category eq 'cu'}">
+			<c:set var="title" value="_고객관리"/>
+		</c:when>
+		<c:when test="${category eq 'hr'}">
+			<c:set var="title" value="_사원관리"/>
+		</c:when>
+		<c:when test="${category eq 'no'}">
+			<c:set var="title" value="_공지사항"/>
+		</c:when>
+		<c:when test="${category eq 'bo'}">
+			<c:set var="title" value="_방명록"/>
+		</c:when>
+		<c:when test="${category eq 'da'}">
+			<c:set var="title" value="_공공데이터"/>
+		</c:when>
+		<c:when test="${category eq 'vi'}">
+			<c:set var="title" value="_시각화"/>
+		</c:when>
+
+	</c:choose>
+	<title>스마트 IoT 융합${title}</title>
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -18,17 +43,17 @@
 	<div class="border-end bg-white" id="sidebar-wrapper">
 		<div class="sidebar-heading border-bottom bg-light">
 			<a href="<c:url value='/'/> ">
-			<img src="<c:url value='img/hanul.logo.png'/>" style="width: 20%">
+			<img src="<c:url value='/'/>img/hanul.logo.png" style="width: 20%">
 			<span>스마트 IoT 융합</span>
 			</a>
 		</div>
 		<div class="list-group list-group-flush">
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/list.cu'/>">고객관리</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/hr/list'/>">사원관리</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/notice/list'/>">공지사항</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/board/list'/>">방명록</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/data/list'/>">공공데이터</a>
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/visual/list'/>">시각화</a>
+			<a class="${category eq 'cu'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/list.cu'/>">고객관리</a>
+			<a class="<c:if test='${category  == "hr"}'>active</c:if>list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/hr/list'/>">사원관리</a>
+			<a class="${category eq 'no'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/notice/list'/>">공지사항</a>
+			<a class="${category eq 'bo'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/board/list'/>">방명록</a>
+			<a class="${category eq 'da'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/data/list'/>">공공데이터</a>
+			<a class="${category eq 'vi'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/visual/list'/>">시각화</a>
 		</div>
 	</div>
 	<!-- Page content wrapper-->
