@@ -11,3 +11,42 @@ left outer join departments d using(department_id)
 left outer join jobs j using(job_id); -> 중복되는 조건을 이용 but alias를 사용하고 있으면 사용 불가
 
  조회할 사항 선택, 테이블 준비, 조회 조건, 정렬 순
+
+ alter table job_history drop constraint jhist_emp_fk;
+  alter table employees drop constraint emp_manager_fk;
+  alter table departments drop constraint dept_mgr_fk;
+ select employee_id, last_name, manager_id from employees;
+
+ select constraint_name, constraint_type
+ from user_constraints
+ where table_name = 'job_history';
+
+ alter trigger update_job_history disable;
+
+ create or replace trigger trg_employees
+ before insert on employees
+ for each row
+ begin
+ select employees_seq.nextval into :new.employee_id from dual;
+ end;
+
+ select distinct manager_id
+ from employees
+ where manager_id is not null;
+
+  insert into employees (last_name, first_name, email, phone_number,
+         hire_date, salary, job_id, department_id, manager_id)
+         values (#{last_name},#{first_name},#{email},
+         #{phone_number},#{hire_date},#{salary},#{job_id},
+         <choose>
+             <when test="department_id == -1">null</when>
+             <otherwise>#{department_id}</otherwise>
+         </choose>
+         ,
+         <choose>
+             <when test="manager_id == -1">null</when>
+             <otherwise>#{manager_id}</otherwise>
+         </choose>
+         )
+
+
