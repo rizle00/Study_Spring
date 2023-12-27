@@ -14,10 +14,10 @@
 	<link href="<c:url value='/css/styles.css'/>" rel="stylesheet" />
 	<link href="<c:url value='/css/common.css/'/>?<%=new java.util.Date()%>" rel="stylesheet" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
-	<script src="<c:url value='/js/common.js'/>?<%= new java.util.Date()%>"></script>
+<%-- jquery  를 common js  에서 쓰고 있기 때문에 먼저 선언해줘야 common에서 사용 가능, 읽는 순서 중요--%>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src="<c:url value='/js/common.js'/>?<%= new java.util.Date()%>"></script>
 
 	<%-- category : cu -> 고객관리
 				hr -> 사원관리...--%>
@@ -72,17 +72,23 @@
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-						<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+
+						<c:if test="${empty loginInfo}">
+						<li class="nav-item active"><a class="nav-link" href="<c:url value='/member/login'/> ">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="">회원가입</a></li>
+						</c:if>
+						<c:if test="${! empty loginInfo}">
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+							<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+							   role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${loginInfo.name}</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#!">Action</a>
-								<a class="dropdown-item" href="#!">Another action</a>
+								<a class="dropdown-item" href="#!">아이디 : ${loginInfo.user_id}</a>
+								<a class="dropdown-item" href="#!">My page</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#!">Something else here</a>
+								<a class="dropdown-item" href="<c:url value='/member/logout'/>">로그아웃</a>
 							</div>
 						</li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

@@ -162,6 +162,31 @@
 			<version>1.18.24</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+		암호화 도구-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>5.7.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test
+		스프링 테스트 도구 버전 맞춤-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+
+
 
 
 

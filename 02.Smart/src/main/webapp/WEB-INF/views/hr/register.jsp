@@ -105,8 +105,8 @@
             <div class="row">
                 <div class="col-auto">
                     <select name ="manager_id" class="form-select">
+                        <option value="-1">매니저 없음</option>
                         <c:forEach items="${managers}" var="m">
-                            <option value="-1">매니저 없음</option>
                             <option value="${m.employee_id}" > ${m.name}</option>
                         </c:forEach>
                     </select>
@@ -127,7 +127,7 @@
     })
 
     $(function (){
-        $(".date").val($.datepicker.formatDate("yy-mm-dd"), new Date())
+        $(".date").val($.datepicker.formatDate("yy-mm-dd", new Date()))
     })
 </script>
 </body>

@@ -10,6 +10,9 @@
         from employees e
                  left join departments d on e.department_id = d.department_id
                  left join jobs j on e.job_id = j.job_id
+        <if test="department_id >0"> where e.department_id = #{department_id}</if>
+        <if test="department_id ==0"> where e.department_id is null</if>
+
         order by employee_id
     </select>
 
@@ -33,8 +36,8 @@
     <update id="update">
         update employees set last_name = #{last_name}, first_name=#{first_name},
         email = #{email}, phone_number = #{phone_number},
-        hire_date = #{hire_date}, salary = #{salary}, job_id = #{job_id}
-        <if test="department_id == -1">department_id =null</if>
+        hire_date = #{hire_date}, salary = #{salary}, job_id = #{job_id},
+        <if test="department_id == -1">department_id = null</if>
         <if test="department_id != -1">department_id = #{department_id}</if>
         where employee_id = #{employee_id}
     </update>
@@ -71,5 +74,11 @@
         select employee_id, last_name||''||first_name name
         from employees
         order by name
+    </select>
+    
+    <select id="employeeDepartment" resultType="departmentVO">
+        select distinct department_id, nvl(department_name,  '소속없음') department_name
+        from employees e left outer join departments d using (department_id)
+        order by department_name
     </select>
 </mapper>

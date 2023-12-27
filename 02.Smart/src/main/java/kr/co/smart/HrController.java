@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,11 +16,17 @@ public class HrController {
  @Autowired private HrService service;
 //    사원 목록 화면 요청
     @RequestMapping("/list")
-    public String list(HttpSession session, Model model){
+    public String list(HttpSession session, Model model,
+                       @RequestParam(defaultValue = "-1") int department_id){
         session.setAttribute("category","hr");
 
 //        DB에서 사원 목록을 조회해 와 목록 화면에 출력 -> Model 객체에 담기
-        model.addAttribute("list", service.employee_list());
+        model.addAttribute("list", service.employee_list(department_id));
+
+//        특정 부서에 속한 사원을 조회할 수 있도록 부서 목록을 DB에서 조회 -> Model 객체에 담기
+        model.addAttribute("departments",service.employee_department_list());
+//        선택한 부서 코드를 넘겨 줘야 비교 가능.
+        model.addAttribute("department_id", department_id);
         return "hr/list";
     }
 

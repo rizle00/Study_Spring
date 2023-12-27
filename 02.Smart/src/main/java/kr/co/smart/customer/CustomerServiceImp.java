@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class CustomerServiceImp implements CustomerService {
 
-    @Autowired private CustomerDAO dao;
+    @Autowired private CustomerDAO2 dao;
     @Override
     public int customer_resiter(CustomerVO vo) {
         return dao.customer_resiter(vo);

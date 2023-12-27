@@ -12,6 +12,8 @@ left outer join jobs j using(job_id); -> 중복되는 조건을 이용 but alias
 
  조회할 사항 선택, 테이블 준비, 조회 조건, 정렬 순
 
+ 제약조건 삭제 및 트리거 조정
+
  alter table job_history drop constraint jhist_emp_fk;
   alter table employees drop constraint emp_manager_fk;
   alter table departments drop constraint dept_mgr_fk;
@@ -23,6 +25,8 @@ left outer join jobs j using(job_id); -> 중복되는 조건을 이용 but alias
 
  alter trigger update_job_history disable;
 
+
+ 트리거 생성 (사번 자동 생성)
  create or replace trigger trg_employees
  before insert on employees
  for each row
@@ -30,10 +34,12 @@ left outer join jobs j using(job_id); -> 중복되는 조건을 이용 but alias
  select employees_seq.nextval into :new.employee_id from dual;
  end;
 
+매니저 조회
  select distinct manager_id
  from employees
  where manager_id is not null;
 
+ 신규등록
   insert into employees (last_name, first_name, email, phone_number,
          hire_date, salary, job_id, department_id, manager_id)
          values (#{last_name},#{first_name},#{email},
@@ -49,4 +55,38 @@ left outer join jobs j using(job_id); -> 중복되는 조건을 이용 but alias
          </choose>
          )
 
+        부서명 조회
+         select distinct department_id, nvl(department_name,  '소속없음') department_name
+         from employees e left outer join departments d using (department_id)
+         order by department_name;
 
+
+         <select id="list" resultType="hrVO"> 부서에 따른 조회, 조건절
+                 select e.last_name || '' || e.first_name name,
+                        e.*,
+                        d.department_name,
+                        j.job_title
+                 from employees e
+                          left join departments d on e.department_id = d.department_id
+                          left join jobs j on e.job_id = j.job_id
+                 <if test="department_id >0"> where e.department_id = #{department_id}</if>
+                 <if test="department_id ==0"> where e.department_id is null</if>
+
+                 order by employee_id
+             </select>
+
+테이블 이름 변경
+drop table member;
+rename hanul_member to member;
+
+테이블 열 추가
+alter table member add (
+    role varchar2(10) default 'USER' not null,
+    gender varchar2(3) default '남' not null,
+    profile varchar2(300));
+
+    열 속성 변경
+    alter table member modify (user_pw varchar2(300));
+
+데이터 -> 암호화 -> 복호화 예전에..
+데이터 -> 암호화    복호화 안됨 지금
