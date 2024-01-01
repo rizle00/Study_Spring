@@ -22,6 +22,7 @@ public class HrService {
         return sql.selectList("hr.list");
     }
     public List<EmployeeVO> employee_list(int department_id){
+
         return sql.selectList("hr.list",  department_id);
     }
 //    사원 정보 조회

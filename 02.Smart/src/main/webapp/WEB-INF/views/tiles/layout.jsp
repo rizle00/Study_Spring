@@ -40,6 +40,9 @@
 		<c:when test="${category eq 'vi'}">
 			<c:set var="title" value="_시각화"/>
 		</c:when>
+		<c:when test="${category eq 'home'}">
+			<c:set var="title" value="_과제"/>
+		</c:when>
 
 	</c:choose>
 	<title>스마트 IoT 융합${title}</title>
@@ -61,6 +64,7 @@
 			<a class="${category eq 'bo'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/board/list'/>">방명록</a>
 			<a class="${category eq 'da'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/data/list'/>">공공데이터</a>
 			<a class="${category eq 'vi'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/visual/list'/>">시각화</a>
+			<a class="${category eq 'home'? 'active' : ''}list-group-item list-group-item-action list-group-item-light p-3" href="<c:url value='/homework/list'/>">과제</a>
 		</div>
 	</div>
 	<!-- Page content wrapper-->
