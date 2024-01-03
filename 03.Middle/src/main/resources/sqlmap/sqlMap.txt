@@ -1,0 +1,7 @@
+ <insert id="join">
+        insert into member
+        (user_id, user_pw, name, gender, email, address, post, phone, birth, profile )
+values (#{user_id},#{user_pw},#{name},#{gender},#{email},#{address, jdbcType=VARCHAR},
+        #{post, jdbcType=VARCHAR},#{phone, jdbcType=VARCHAR},#{birth, jdbcType=VARCHAR},
+        #{profile, jdbcType=VARCHAR})
+    </insert>  ,jdbcType = VARCHAR -> null 허용

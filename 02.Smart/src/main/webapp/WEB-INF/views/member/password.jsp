@@ -61,9 +61,7 @@
             //          url:"confirmPassword",
             //          data: {user_pw: $("[name=user_pw]").val()},
             //          success: function (response){
-            //
             //          }
-            //
             //      })
             $.ajax({
                 url: "confirmPassword",

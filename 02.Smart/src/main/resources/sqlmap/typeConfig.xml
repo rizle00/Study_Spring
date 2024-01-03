@@ -5,7 +5,7 @@
 
     <typeAliases>
         <typeAlias type="kr.co.smart.customer.CustomerVO" alias="cuVO"/>
-        <typeAlias type="kr.co.smart.hr.EmployeeVO" alias="hrVO"/>
+        <typeAlias type="kr.co.smart.hr.EmployeeVO" alias="employee"/>
         <typeAlias type="kr.co.smart.hr.DepartmentVO" alias="departmentVO"/>
         <typeAlias type="kr.co.smart.hr.JobVO" alias="jobVO"/>
         <typeAlias type="kr.co.smart.member.MemberVO" alias="memberVO"/>

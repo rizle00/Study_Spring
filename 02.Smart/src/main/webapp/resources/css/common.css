@@ -14,6 +14,9 @@ table.tb-list tr {height: 48px;}
 table.tb-row tr {height: 60px;}
 table.tb-list th, table.tb-list td { padding: 0px 16px; text-align: center;}
 
+.profile {width: 38px; height: 38px; border-radius: 50%;}
+.font_profile { font-size: 30px;}
+
 .w-pct80{ width: 80%;}
 .w-pct60{ width: 60%;}
 .w-pct40{ width: 40%;}

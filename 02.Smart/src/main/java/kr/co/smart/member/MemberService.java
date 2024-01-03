@@ -15,7 +15,7 @@ public class MemberService {
 //     CRUD
 //    회원가입시 회원정보 신규 삽입 저장
     public int member_join(MemberVO vo){
-        return 0;
+        return sql.insert("member.join", vo);
     }
 
 //    회원 목록 조회(관리자)
@@ -30,7 +30,7 @@ public class MemberService {
 
 //    회원 정보 변경 저장(마이페이지)
     public int member_update(MemberVO vo){
-        return 0;
+        return sql.update("member.update", vo);
     }
 
     public int member_delete(String user_id){

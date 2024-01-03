@@ -12,6 +12,6 @@ public class EmployeeVO {
     private String last_name, first_name, name, department_name
             , job_id, job_title, phone_number, email, manager_name;
     private Date hire_date;
-//    date 임포트 에 따라 date 타입이 달라짐
+    //    date 임포트 에 따라 date 타입이 달라짐
     private Double commission_pct;
 }

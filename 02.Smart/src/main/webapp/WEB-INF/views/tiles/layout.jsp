@@ -14,6 +14,7 @@
 	<link href="<c:url value='/css/styles.css'/>" rel="stylesheet" />
 	<link href="<c:url value='/css/common.css/'/>?<%=new java.util.Date()%>" rel="stylesheet" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <%-- jquery  를 common js  에서 쓰고 있기 때문에 먼저 선언해줘야 common에서 사용 가능, 읽는 순서 중요--%>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -82,14 +83,24 @@
 						<li class="nav-item"><a class="nav-link" href="">회원가입</a></li>
 						</c:if>
 						<c:if test="${! empty loginInfo}">
+							<li class="nav-item">
+								<c:choose>
+									<c:when test="${empty loginInfo.profile}"><i class="font_profile fa-regular fa-user"></i> </c:when>
+									<c:otherwise>
+										<img class="profile" src="${loginInfo.profile}">
+									</c:otherwise>
+								</c:choose>
+							</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
 							   role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${loginInfo.name}</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+								<c:if test="${empty loginInfo.social }">
 								<a class="dropdown-item" href="#!">아이디 : ${loginInfo.user_id}</a>
 								<a class="dropdown-item" href="#!">My page</a>
 								<a class="dropdown-item" href="<c:url value='/member/changePassword'/>">비밀번호 변경</a>
 								<div class="dropdown-divider"></div>
+								</c:if>
 								<a class="dropdown-item" href="<c:url value='/member/logout'/>">로그아웃</a>
 							</div>
 						</li>

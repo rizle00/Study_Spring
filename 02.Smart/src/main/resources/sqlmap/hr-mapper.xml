@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hr">
 
-    <select id="list" resultType="hrVO">
+    <select id="list" resultType="employee">
         select e.last_name || '' || e.first_name name,
                e.*,
                d.department_name,
@@ -16,7 +16,7 @@
         order by employee_id
     </select>
 
-    <select id="info" resultType="hrVO">
+    <select id="info" resultType="employee">
         select e.last_name || '' || e.first_name name,
                m.last_name || '' || m.first_name manager_name,
                e.*,
@@ -70,7 +70,7 @@
         )
     </insert>
 
-    <select id="managerList" resultType="hrVO">
+    <select id="managerList" resultType="employee">
         select employee_id, last_name||''||first_name name
         from employees
         order by name

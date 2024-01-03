@@ -20,8 +20,10 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 	<context:component-scan base-package="kr.co.middle" />
+
 	
 	
 	

@@ -1,10 +1,14 @@
 package kr.co.smart;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import kr.co.smart.common.CommonUtility;
 import kr.co.smart.member.MemberService;
 import kr.co.smart.member.MemberVO;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Properties;
 import java.util.UUID;
 
 @Controller
@@ -136,13 +142,141 @@ public class MemberController {
         }
     }
 
-//  새 비밀번호로 변경 저장 처리 요청
-    @RequestMapping("/updatePassword") @ResponseBody
-    public boolean updatePassword(String user_pw, HttpSession session){
+    //  새 비밀번호로 변경 저장 처리 요청
+    @RequestMapping("/updatePassword")
+    @ResponseBody
+    public boolean updatePassword(String user_pw, HttpSession session) {
         //        세션 로그인 정보 꺼내기
         MemberVO vo = (MemberVO) session.getAttribute("loginInfo");
 //        입력 새 비멀번호를 암호화하기
         vo.setUser_pw(pwEncoder.encode(user_pw));
-      return  service.member_resetPassword(vo) == 1? true: false ;
+        return service.member_resetPassword(vo) == 1 ? true : false;
+    }
+    Properties properties = new Properties(); //프로퍼티 등록
+    //네이버 로그인 요청
+    @RequestMapping("/naverLogin")
+    public String naverlogin(HttpSession session, HttpServletRequest request) {
+       String naver_id = properties.getProperty("NAVER_CLIENT_ID");
+        // 네이버 로그인 연동 URL 생성하기
+//        https://nid.naver.com/oauth2.0/authorize?response_type=code
+//        &client_id=CLIENT_ID
+//        &state=STATE_STRING
+//        &redirect_uri=CALLBACK_URL
+        String state = UUID.randomUUID().toString();
+        session.setAttribute("state", state);
+        StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/authorize?response_type=code");
+        url.append("&client_id=").append(naver_id)
+                .append("&state=").append(state)
+                .append("&redirect_uri=").append(common.appURL(request))
+                .append("/member/naverCallback"); //http://localhost:80/smart/member/naverCallback
+        return "redirect:" + url.toString();
+
+    }
+
+    @RequestMapping("/naverCallback")
+    public String naverCallback(String state, String code, HttpSession session) {
+        String naver_id = properties.getProperty("NAVER_CLIENT_ID");
+        String naver_pw = properties.getProperty("NAVER_SECRET");
+        if (code == null) return "redirect:/";
+//        if(code != null){
+//
+//        }
+//        https://nid.naver.com/oauth2.0/token?grant_type=authorization_code
+//        &client_id=jyvqXeaVOVmV
+//        & client_secret=527300A0_COq1_XV33cf
+//        &code=EIc5bFrl4RibFls1
+//        &state=9kgsGTfH4j7IyAkg
+//
+        StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/token?grant_type=authorization_code");
+        url.append("&client_id=").append(naver_id)
+                .append("&client_secret=").append(naver_pw)
+                .append("&code=").append(code)
+                .append("&state=").append(state);
+        String response = common.requestAPI(url.toString());
+
+        HashMap<String, String> map =
+                new Gson().fromJson(response, new TypeToken<HashMap<String, String>>() {
+                }.getType());
+        String token = map.get("access_token");
+        String type = map.get("token_type");
+
+//        {
+//            "access_token": "AAAAQosjWDJieBiQZc3to9YQp6HDLvrmyKC+6+iZ3gq7qrkqf50ljZC+Lgoqrg",
+//                "token_type": "bearer",
+//        }
+
+//        접근 토큰을 이용하여 프로필 api 호출하기
+        response = common.requestAPI("https://openapi.naver.com/v1/nid/me", type + " " + token);
+//        HashMap<String,Object> me =
+//                new Gson().fromJson(response, new TypeToken<HashMap<String , Object>>(){}.getType());
+        JSONObject json = new JSONObject(response);
+        if (json.getString("resultcode").equals("00")) {
+            json = json.getJSONObject("response");
+
+            String email = json.getString("email");
+            String gender = json.getString("gender").equals("F")? "여":"남" ; // F/M -< 여/ 남
+            String id = json.getString("id");
+            String name = json.getString("name");
+            String profile = json.getString("profile_image");
+
+            MemberVO member = new MemberVO();
+            member.setSocial("N");// N : 네이버 , K : 카카오
+            member.setUser_id(id);
+            member.setName(name);
+            member.setEmail(email);
+            member.setGender(gender);
+            member.setProfile(profile);
+            member.setPhone(json.getString("mobile"));
+
+//            네이버 로그인이 처음인 경우 : insert, 아니면 update
+            if(service.member_info(id) == null){
+                service.member_join(member);
+            } else{
+                service.member_update(member);
+            }
+            session.setAttribute("loginInfo", member);
+        }
+//        if(me.get("resultcode").equals("00")){
+//            HashMap<String,Object> json = (HashMap<String,Object>) me.get("response");
+
+//        }
+
+//        {
+//            "resultcode": "00",
+//                "message": "success",
+//                "response": {
+//            "email": "openapi@naver.com",
+//                    "nickname": "OpenAPI",
+//                    "profile_image": "https://ssl.pstatic.net/static/pwe/address/nodata_33x33.gif",
+//                    "age": "40-49",
+//                    "gender": "F",
+//                    "id": "32742776",
+//                    "name": "오픈 API",
+//                    "birthday": "10-01"
+//        }
+//        }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/kakaoLogin")
+    public String kakaologin(HttpServletRequest request){
+        StringBuffer url = new StringBuffer("https://kauth.kakao.com/oauth/authorize?response_type=code");
+        url.append("&client_id=").append("key")
+                .append("&redirect_uri=").append(common.appURL(request))
+                .append("/member/kakaoCallback"); //http://localhost:80/smart/member/naverCallback
+        return "redirect:" + url.toString();
+    }
+
+    @RequestMapping("/kakaoCallback")
+    private void kakaocallback(String code){
+
+        StringBuffer url = new StringBuffer("https://kauth.kakao.com/oauth/token?grant_type=authorization_code");
+        url.append("&client_id=").append("key")
+                .append("&code=").append(code);
+
+        common.requestAPI(url.toString());
+
+
     }
 }
