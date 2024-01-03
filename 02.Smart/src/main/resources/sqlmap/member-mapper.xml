@@ -29,7 +29,8 @@
     <insert id="join">
         insert into member
         (user_id, user_pw, name, email, gender, phone, post, address, birth, profile, social)
-        values (#{user_id},#{user_pw, jdbcType=VARCHAR},#{name},#{email},#{gender},
+        values (#{user_id},#{user_pw, jdbcType=VARCHAR},#{name},
+                #{email, jdbcType=VARCHAR},#{gender, jdbcType=VARCHAR},
                 #{phone, jdbcType=VARCHAR},#{post, jdbcType=VARCHAR},
                 #{address, jdbcType=VARCHAR},#{birth, jdbcType=VARCHAR},
                 #{profile, jdbcType=VARCHAR}, #{social, jdbcType=VARCHAR})
@@ -37,7 +38,8 @@
 
     <update id="update">
         update member
-        set name = #{name}, email = #{email}, gender = #{gender}, phone = #{phone},
+        set name = #{name}, email = #{email, jdbcType=VARCHAR},
+            gender = #{gender, jdbcType=VARCHAR}, phone = #{phone, jdbcType=VARCHAR},
             address = #{address, jdbcType=VARCHAR}, post = #{post, jdbcType=VARCHAR},
             birth = #{birth, jdbcType=VARCHAR}, profile = #{profile}
         where user_id = #{user_id}

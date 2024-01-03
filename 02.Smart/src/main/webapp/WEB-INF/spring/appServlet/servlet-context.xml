@@ -19,7 +19,7 @@
 	<resources mapping="/js/**" location="/resources/js/"/>
 	<resources mapping="/img/**" location="/resources/images/"/>
 
-	<context:property-placeholder location="classpath:dbconn/login.properties"/>
+<!--	<context:property-placeholder location="classpath:dbconn/login.properties"/>-->
 
 
 

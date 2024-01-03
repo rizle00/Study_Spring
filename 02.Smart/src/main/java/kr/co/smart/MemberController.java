@@ -269,14 +269,38 @@ public class MemberController {
     }
 
     @RequestMapping("/kakaoCallback")
-    private void kakaocallback(String code){
+    private String kakaocallback(String code, HttpSession session){
 
         StringBuffer url = new StringBuffer("https://kauth.kakao.com/oauth/token?grant_type=authorization_code");
         url.append("&client_id=").append("key")
                 .append("&code=").append(code);
 
-        common.requestAPI(url.toString());
+       String response = common.requestAPI(url.toString());
+       HashMap<String, String> map = new Gson().fromJson(response, new TypeToken<HashMap<String, String>>() {
+       }.getType());
+        String token = map.get("access_token");
 
+        response = common.requestAPI("https://kapi.kakao.com/v2/user/me", "Bearer "+token);
+        JSONObject json = new JSONObject(response);
+        if(!json.isEmpty()){
+            String id = json.getLong("id")+"";
+            json = json.getJSONObject("properties");
+            String name = json.getString("nickname");
+            String profile = json.getString("profile_image");
+            MemberVO member = new MemberVO();
+            member.setSocial("K");// N : 네이버 , K : 카카오
+            member.setUser_id(id);
+            member.setName(name);
+            member.setProfile(profile);
+            System.out.println(new Gson().toJson(member));
+            if(service.member_info(id) == null){
+                service.member_join(member);
+            } else{
+                service.member_update(member);
+            }
+            session.setAttribute("loginInfo", member);
+        }
+        return "redirect:/";
 
     }
 }
