@@ -21,8 +21,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	@Autowired private MemberService member;
-	@Autowired private BCryptPasswordEncoder pwEncoder;
+//	@Autowired private MemberService member;
+//	@Autowired private BCryptPasswordEncoder pwEncoder;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {

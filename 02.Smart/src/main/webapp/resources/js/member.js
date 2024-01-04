@@ -5,6 +5,36 @@ var member = {
     tagStatus : function (tag, input){
         if( tag.is("[name=user_pw]")) return this.userpw_status( tag.val(), input);
         else if( tag.is("[name=user_pw_ck]")) return this.userpw_ch_status( tag.val());
+        else if( tag.is("[name=user_id]")) return this.userid_status(tag.val());
+        else if( tag.is("[name=email]")) return this.email_status(tag.val());
+    },
+
+    userid_status: function(id){
+        var reg = /[^a-z0-9]/g
+        if(id=="") return this.common.empty;
+        else if(reg.test(id)) return this.userid.invalid;
+        else if(id.length<5) return this.common.min;
+        else if(id.length>10) return this.common.max;
+        else return this.userid.valid;
+    },
+
+    email_status: function (email){
+        var reg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        if(email =="") return this.common.empty;
+        else if(reg.test(email)) return this.email.valid;
+        else return this.email.invalid;
+
+    },
+    email:{
+        valid:{is : true, desc:"유효합니다"},
+        invalid:{is : false, desc:"유효하지 않습니다"}
+
+    },
+    userid:{
+        invalid: {is : false, desc : "영문 소문자, 숫자만 입력하세요"},
+        valid: {is : true, desc: "중복 확인 하세요"},
+        usable: {is : true, desc: "사용 가능한 아이디 입니다"},
+        unUsable: {is : false, desc: "이미 사용중 인 아이디 입니다"},
     },
 
     common : {
@@ -14,13 +44,15 @@ var member = {
         space:{ is : false, desc:"공백 없이 입력하세요"}
     },
 
+
     userpw:{
-        valid: {is : true, desc: "사용가능합니다"},
+        valid: {is : true, desc: "사용 가능 합니다"},
         lack: {is : false, desc: "영문 대/소문자, 숫자를 모두 포함해야 합니다"},
         invalid: {is : false, desc: "영문 대/소문자, 숫자만 입력하세요"},
         equal :{is : true, desc : " 비밀번호와 일치합니다"},
         notequal :{is : false, desc : " 비밀번호와 일치하지 않습니다"}
     },
+
     space:/\s/g,//공백 판단 처리, js 정규식
 
     userpw_status : function (pw, input){

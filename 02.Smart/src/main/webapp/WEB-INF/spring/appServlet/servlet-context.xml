@@ -19,7 +19,8 @@
 	<resources mapping="/js/**" location="/resources/js/"/>
 	<resources mapping="/img/**" location="/resources/images/"/>
 
-<!--	<context:property-placeholder location="classpath:dbconn/login.properties"/>-->
+<!--	리소스 안에 바로 있어서.. 클래스 패스-->
+	<context:property-placeholder location="classpath:login.properties"/>
 
 
 
