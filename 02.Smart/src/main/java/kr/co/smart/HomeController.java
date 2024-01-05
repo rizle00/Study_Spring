@@ -21,21 +21,21 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-//	@Autowired private MemberService member;
-//	@Autowired private BCryptPasswordEncoder pwEncoder;
+	@Autowired private MemberService member;
+	@Autowired private BCryptPasswordEncoder pwEncoder;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
 //		테스트 하는 동안 사용할 수 있도록 임시 로그인 처리-----
-//		String user_id = "test", user_pw = "asdfG1";
-//		MemberVO vo = member.member_info(user_id);
-//		if(pwEncoder.matches(user_pw, vo.getUser_pw())){
-//			session.setAttribute("loginInfo",vo);
+		String user_id = "test", user_pw = "asdfG1";
+		MemberVO vo = member.member_info(user_id);
+		vo.setRole("admin");
+		if(pwEncoder.matches(user_pw, vo.getUser_pw())){
+			session.setAttribute("loginInfo",vo);
 //			session 에 세팅
 
-//		}
-//		-------------------------------------
-
+		}
+//---------------------------------------------------------
 		session.removeAttribute("category");
 //		session.setAttribute("category", "");
 		return "home";

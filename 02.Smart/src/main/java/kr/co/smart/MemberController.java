@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,8 @@ public class MemberController {
     private MemberService service;
     @Autowired
     private BCryptPasswordEncoder pwEncoder;
+
+    private final String ENC = "text/html; charset = utf-8";
 
 
     //     로그인 화면 요청
@@ -371,5 +374,35 @@ public class MemberController {
     public boolean idCheck(String user_id){
 //        true 사용가능, false 사용불가
        return service.member_info(user_id)==null ? true : false;
+    }
+
+//    회원 가입 처리 요청
+    @RequestMapping(value = "/register", produces = ENC) @ResponseBody
+    public String register(MemberVO vo, HttpServletRequest request, MultipartFile file, HttpSession session){
+//        화면에서 입력한 정보로 DB에 신규회원정보를 저장 -> 웰컴 페이지로 연결
+
+        if(!file.isEmpty()){
+            vo.setProfile(common.fileUpload("profile", file, request));
+        }
+        vo.setUser_pw(pwEncoder.encode(vo.getUser_pw()));
+
+        StringBuffer msg = new StringBuffer("<script>");
+        if(service.member_join(vo) ==1){
+//            회원 가입 축하 메일 보내기
+           String welcome =  session.getServletContext().getRealPath("resources/file/학원 안내서.txt");
+            common.sendWelcome(vo, welcome);
+
+            msg.append("alert('회원 가입을 축하합니다 '); location ='")
+                    .append(request.getContextPath())
+                    .append("'");
+            System.out.println(request.getContextPath());
+
+        } else {
+            msg.append("alert('회원 가입 실패 '); history.go(-1)");
+        }
+
+
+        msg.append("</script>");
+        return msg.toString();
     }
 }

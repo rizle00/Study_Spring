@@ -37,6 +37,7 @@ $(function (){
 
         var _preview = $(this).closest(".file-info").find(".file-preview");
         var _delete = $(this).closest(".file-info").find(".file-delete");
+        var _name = $(this).closest(".file-info").find(".file-name");
         var attached = this.files[0];
 
         // if(attached != "undefined")
@@ -46,11 +47,11 @@ $(function (){
         //     파일 크기 제한을 두고자 한다면
             if(rejectFile(attached, $(this))) return;
 
+            _name.text(attached.name);
+            _delete.removeClass("d-none"); // 삭제 보이게
 
-
-        //     이미지만 첨부 해야 한다면
+            //     이미지만 첨부 해야 한다면
             if(isImg(attached.name)){
-                _delete.removeClass("d-none"); // 삭제 보이게
 
                if(_preview.length>0){
                    _preview.html("<img>");// img 요소 추가
@@ -65,7 +66,10 @@ $(function (){
                }
             } else {
                 console.log($(this).val())
-                initFileInfo($(this))
+                if($(this).hasClass("image-only")){
+
+                    initFileInfo($(this))
+                }
                 // _preview.empty();
                 // _delete.addClass("d-none");
                 // _preview.children("img").remove();
@@ -108,7 +112,22 @@ function rejectFile( fileInfo, tag){
 
 function initFileInfo(tag){
     var _info =tag.closest(".file-info")
-    _info.find(".file-preview").empty();
-    _info.find("input[type=file]").val("");
-    _info.find(".file-delete").addClass("d-none");
+    _info.find(".file-name").empty();//파일명 안보이게
+    _info.find(".file-preview").empty();// 미리보기 안보이게
+    _info.find("input[type=file]").val("");//파일정보 초기화
+    _info.find(".file-delete").addClass("d-none");// 삭제버튼 안보이게
+}
+
+//입력 여부 확인
+function emptyCheck(){
+var ok = true;
+    $(".check-empty").each(function (){
+        if($(this).val()==""){
+            alert($(this).attr("title")+" 입력하세요!");
+            $(this).focus();
+            ok = false;
+            return ok;
+        }
+    })
+    return ok;
 }

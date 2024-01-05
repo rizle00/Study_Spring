@@ -10,5 +10,6 @@
         <typeAlias type="kr.co.smart.hr.JobVO" alias="jobVO"/>
         <typeAlias type="kr.co.smart.member.MemberVO" alias="memberVO"/>
         <typeAlias type="kr.co.smart.homework.HomeworkVO" alias="hwVO"/>
+        <typeAlias type="kr.co.smart.notice.NoticeVO" alias="notice"/>
     </typeAliases>
 </configuration>

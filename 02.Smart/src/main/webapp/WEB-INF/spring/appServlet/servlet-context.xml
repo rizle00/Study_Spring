@@ -38,6 +38,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions" value="/WEB-INF/views/tiles/config.xml"/>
 	</beans:bean>
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 	
 	<context:component-scan base-package="kr.co.smart" />
 <!--	pakage 추가-->
