@@ -11,35 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb782727-13bd-4263-88b8-525a562321db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/file.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/NoticeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/info.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/list.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/register.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/web/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/CommonUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/CommonUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/member-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/member-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/sql.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/sql.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/typeConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/typeConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/member/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/member/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/smart/DBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/smart/DBTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../03.Middle/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../03.Middle/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../03.Middle/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../03.Middle/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../03.Middle/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/../03.Middle/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../03.Middle/.settings/org.eclipse.wst.common.component" beforeDir="false" afterPath="$PROJECT_DIR$/../03.Middle/.settings/org.eclipse.wst.common.component" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,27 +40,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 9.0.82.executor&quot;: &quot;Run&quot;,
-    &quot;Tomcat Server.register.jsp.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/app/upload&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Tomcat Server.Tomcat 9.0.82.executor": "Run",
+    "Tomcat Server.register.jsp.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Study_IoT/ArduinoWork/_38_MyTalk_Bluetooth/MyVCharTalk",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.82" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.82" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:/Program Files/Java/jdk-11" nameIsGenerated="true">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
@@ -204,6 +176,8 @@
       <updated>1704432919836</updated>
       <workItem from="1704432922505" duration="7875000" />
       <workItem from="1704441668868" duration="1514000" />
+      <workItem from="1704685017606" duration="28000" />
+      <workItem from="1704956936052" duration="24000" />
     </task>
     <servers />
   </component>
