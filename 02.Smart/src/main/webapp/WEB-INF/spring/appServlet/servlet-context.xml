@@ -19,7 +19,8 @@
 	<resources mapping="/js/**" location="/resources/js/"/>
 	<resources mapping="/img/**" location="/resources/images/"/>
 
-<!--	<context:property-placeholder location="classpath:dbconn/login.properties"/>-->
+<!--	리소스 안에 바로 있어서.. 클래스 패스-->
+	<context:property-placeholder location="classpath:login.properties"/>
 
 
 
@@ -37,6 +38,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions" value="/WEB-INF/views/tiles/config.xml"/>
 	</beans:bean>
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 	
 	<context:component-scan base-package="kr.co.smart" />
 <!--	pakage 추가-->

@@ -38,6 +38,8 @@ public class DBTest {
         vo.setUser_pw(pwEncoder.encode(sc.next()));
         System.out.println("이메일 : ");
         vo.setEmail(sc.next());
+        System.out.println("관리자?(Y/N)");
+        vo.setRole(sc.next().toLowerCase().equals("y")? "ADMIN" : "USER");
         sc.close();
 
         int dml = sql.insert("member.joinTest", vo);

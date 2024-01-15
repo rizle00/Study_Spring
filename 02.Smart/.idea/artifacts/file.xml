@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="file">
+    <output-path>$PROJECT_DIR$/out/artifacts/file</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/../../app/upload" />
+    </root>
+  </artifact>
+</component>

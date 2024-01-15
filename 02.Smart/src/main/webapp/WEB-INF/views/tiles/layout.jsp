@@ -29,6 +29,9 @@
 		<c:when test="${category eq 'hr'}">
 			<c:set var="title" value="_사원관리"/>
 		</c:when>
+		<c:when test="${category eq 'join'}">
+			<c:set var="title" value="_회원가입"/>
+		</c:when>
 		<c:when test="${category eq 'no'}">
 			<c:set var="title" value="_공지사항"/>
 		</c:when>
@@ -80,7 +83,7 @@
 
 						<c:if test="${empty loginInfo}">
 						<li class="nav-item active"><a class="nav-link" href="<c:url value='/member/login'/> ">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a></li>
 						</c:if>
 						<c:if test="${! empty loginInfo}">
 							<li class="nav-item">
