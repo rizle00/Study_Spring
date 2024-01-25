@@ -66,6 +66,7 @@
     });
 
     $("#btn-modify").click(function () {
+        location = "modify?id=${vo.id}"
     });
 
     $("#btn-delete").click(function () {

@@ -32,7 +32,7 @@ public class NoticeService {
 
 //    공지 글 정보 변경 저장
     public int notice_update(NoticeVO vo){
-        return 0;
+        return sql.update("notice.update", vo);
     }
 
 //    공지 글 정보 삭제

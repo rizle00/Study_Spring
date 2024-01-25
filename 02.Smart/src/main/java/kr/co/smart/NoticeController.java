@@ -4,6 +4,7 @@ import kr.co.smart.common.CommonUtility;
 import kr.co.smart.notice.NoticeService;
 import kr.co.smart.notice.NoticeVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,4 +85,51 @@ public class NoticeController {
        }
         return "redirect:list";
     }
+
+//    공지 글 수정 화면 요청
+    @RequestMapping("/modify")
+    public String modify(int id, Model model){
+//        해당 공지글 정보를 DB에서 조회해와 수정
+        model.addAttribute("vo", service.notice_info(id));
+        return "notice/modify";
+    }
+
+//    공지 글 변경 저장 처리 요청
+    @RequestMapping("/update")
+    public String update(NoticeVO vo, MultipartFile file, HttpServletRequest request){
+//        화면에서 변경 입력한 정보로 DB에 변경 저장하기 -> 정보 화면 연결
+        NoticeVO notice = service.notice_info(vo.getId());
+//        첨부 파일이 없는 경우
+//        x -> x
+//        o -> o
+        if(file.isEmpty()){// 첨부한 파일 없음
+            if(!vo.getFilename().isEmpty()){//원래 첨부 파일 있음
+                vo.setFilepath(notice.getFilepath());//원래 첨부 파일 경로 그대로 저장
+            }// 원래 첨부 파일 없으면 없는대로 저장
+
+        } else{//        첨부 파일이 있는 경우
+            //        o -> x
+
+
+//        x -> o
+            vo.setName(file.getOriginalFilename());
+            vo.setFilepath(common.fileUpload("notice", file, request));
+        }
+
+
+       if( service.notice_update(vo) == 1){
+
+           if(file.isEmpty()){
+               if(vo.getFilename().isEmpty()){
+                   common.fileDelete(notice.getFilepath(), request);
+               }
+           } else {
+                   common.fileDelete(notice.getFilepath(), request);
+
+           }
+
+       }
+        return "redirect:info?id="+vo.getId();
+    }
+
 }

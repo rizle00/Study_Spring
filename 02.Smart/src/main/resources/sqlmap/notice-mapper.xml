@@ -34,4 +34,10 @@
         where id=#{id}
     </delete>
 
+    <update id="update">
+        update notice
+        set title = #{title}, content = #{content} ,filepath =  #{filepath, jdbcType=VARCHAR} , filename = #{filename, jdbcType=VARCHAR}
+        where id = #{id}
+    </update>
+
 </mapper>
