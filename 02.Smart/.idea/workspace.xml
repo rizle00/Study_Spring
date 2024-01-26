@@ -11,18 +11,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb782727-13bd-4263-88b8-525a562321db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/PageVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/modify.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/include/page.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/NoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/NoticeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/PageVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/PageVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/info.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/modify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -62,7 +70,7 @@
     "Tomcat Server.register.jsp.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Study_Spring/02.Smart/src/main/webapp/WEB-INF/views/notice",
+    "last_opened_file_path": "D:/Project/Project_HealthKeeper/App",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,11 +79,13 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propCompiler",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\include" />
       <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\notice" />
     </key>
   </component>
@@ -196,7 +206,8 @@
       <workItem from="1704441668868" duration="1514000" />
       <workItem from="1704685017606" duration="28000" />
       <workItem from="1704956936052" duration="24000" />
-      <workItem from="1706160456199" duration="7910000" />
+      <workItem from="1706160456199" duration="8258000" />
+      <workItem from="1706229378597" duration="12308000" />
     </task>
     <servers />
   </component>

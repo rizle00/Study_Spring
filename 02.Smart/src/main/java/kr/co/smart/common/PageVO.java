@@ -3,8 +3,10 @@ package kr.co.smart.common;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter @Setter
-public class PageVo {// 페이징 처리
+public class PageVO {// 페이징 처리
 //    페이지당 보여질 목록 수 : 4
 //    블럭당 보여질 페이지의 수 : 3
 //    총 목록수 : 30
@@ -21,8 +23,11 @@ public class PageVo {// 페이징 처리
 //    총 페이지수를 끝 페이지번호로 한다.
         private int pageList = 10, blockPage = 10;
 
-        private int totalList, totalPage, totalBlock, beginList, endList, curBlock, curPage = 1, beginPage, endPage;
+        private int totalList, totalPage, totalBlock, beginList, endList,
+                curBlock, curPage = 1, beginPage, endPage;
+        private List<Object> list;
 
+        private String search = "all", keyword = "";
        public void setTotalList(int totalList){
                this.totalList = totalList;
 

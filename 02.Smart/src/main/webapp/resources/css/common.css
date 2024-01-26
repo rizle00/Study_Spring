@@ -23,6 +23,7 @@ table.tb-list th, table.tb-list td { padding: 0px 16px; text-align: center;}
 input[type=file] {display: none;}
 .file-preview img{ max-height: 42px;}
 textarea.form-control {resize: none; height: 250px;}
+.input-group .form-select{flex: initial; width: 100px;}
 
 .w-pct80{ width: 80%;}
 .w-pct60{ width: 60%;}

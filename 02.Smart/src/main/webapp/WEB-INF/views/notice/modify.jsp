@@ -46,6 +46,9 @@
 
     </table>
     <input type="hidden" name="filename">
+    <input type="hidden" name="curPage" value="${page.curPage}">
+    <input type="hidden" name="search" value="${page.search}">
+    <input type="hidden" name="keyword" value="${page.keyword}">
 </form>
 <div class="btn-toolbar justify-content-center gap-2">
     <button class="btn btn-dark px-4" id="btn-save">저장</button>
@@ -59,7 +62,7 @@
         }
     })
     $("#btn-cancel").click(function () {
-        location = "info?id=${vo.id}";
+        location = "info?id=${vo.id}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}";
     })
 </script>
 

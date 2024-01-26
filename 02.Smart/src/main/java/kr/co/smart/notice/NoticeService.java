@@ -1,5 +1,6 @@
 package kr.co.smart.notice;
 
+import kr.co.smart.common.PageVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +22,16 @@ public class NoticeService {
         return sql.selectList("notice.list");
     }
 
+//    페이징 처리 후 목록 조회
+    public PageVO notice_list(PageVO page){
+       page.setTotalList(sql.selectOne("notice.totalList", page));
+       page.setList(sql.selectList("notice.list", page));
+        return page;
+
+    }
+
+
+
 //    공지 글 정보 조회
     public NoticeVO notice_info(int id){
         return sql.selectOne("notice.info", id);
@@ -39,4 +50,5 @@ public class NoticeService {
     public int notice_delete(int id){
         return sql.delete("notice.delete", id);
     }
+
 }
