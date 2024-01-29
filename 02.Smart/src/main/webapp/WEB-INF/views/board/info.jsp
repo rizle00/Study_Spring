@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h3 class="mb-4"> 공지 글 정보 </h3>
+<h3 class="mb-4"> 방명록 정보 </h3>
 <table class="table tb-row">
     <colgroup>
         <col width='180px'>
@@ -39,13 +39,13 @@
     <tr>
         <th>첨부파일</th>
         <td colspan="5">
-            <c:if test="${!empty vo.filename}">
-                <div class="row">
-                    <div class="col-auto">
-                        <span> ${vo.filename}</span> <i role="button" class="file-download fa-solid fa-download ms-2"></i>
-                    </div>
-                </div>
-            </c:if>
+<%--            <c:if test="${!empty vo.filename}">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-auto">--%>
+<%--                        <span> ${vo.filename}</span> <i role="button" class="file-download fa-solid fa-download ms-2"></i>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </c:if>--%>
         </td>
     </tr>
 
@@ -59,10 +59,7 @@
     <button class="btn btn-primary" id="btn-modify">정보수정</button>
     <button class="btn btn-primary" id="btn-delete">정보삭제</button>
     </c:if>
-    <!-- 로그인한 사용자가 답글쓰기 가능하다고 하자 -->
-    <c:if test="${ ! empty loginInfo }">
-        <button class="btn btn-primary" id="btn-reply">답글쓰기</button>
-    </c:if>
+
 </div>
 <c:set var="params" value="curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}"/>
 <script>
@@ -83,9 +80,7 @@
     $(".file-download").click(function (){
         location="download?id=${vo.id}";
     })
-    $("#btn-reply").click(function(){
-        location = "reply?id=${vo.id}&${params}"
-    })
+
 </script>
 
 </body>

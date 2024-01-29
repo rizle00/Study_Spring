@@ -78,4 +78,11 @@
         where id = #{id}
     </update>
 
+    <!-- 공지답글등록 -->
+    <insert id="replyRegister">
+        insert into notice ( title, content, writer, filename, filepath, root, step, indent, rid)
+        values ( #{title}, #{content}, #{writer}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}
+               , #{root}, #{step}+1, #{indent}+1, #{rid} )
+    </insert>
+
 </mapper>

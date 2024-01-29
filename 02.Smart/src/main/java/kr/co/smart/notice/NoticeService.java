@@ -51,4 +51,9 @@ public class NoticeService {
         return sql.delete("notice.delete", id);
     }
 
+    //신규답글저장
+    public int notice_replyRegister(NoticeVO vo) {
+        return sql.insert("notice.replyRegister", vo);
+    }
+
 }

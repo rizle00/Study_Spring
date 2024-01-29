@@ -11,18 +11,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb782727-13bd-4263-88b8-525a562321db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/include/page.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/board/BoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/board/BoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/FileVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/board-mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/info.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/register.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/reply.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/NoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/NoticeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/PageVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/PageVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/notice/NoticeVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/typeConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/typeConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/info.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/list.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/modify.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +41,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -70,7 +76,7 @@
     "Tomcat Server.register.jsp.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Project/Project_HealthKeeper/App",
+    "last_opened_file_path": "D:/Study_Spring/02.Smart/src/main/webapp/WEB-INF/views/board",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,8 +91,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\board" />
+      <recent name="D:\Study_Spring\02.Smart\src\main\resources\sqlmap" />
       <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\include" />
       <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\notice" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="kr.co.smart.common" />
+      <recent name="kr.co.smart.board" />
     </key>
   </component>
   <component name="RunManager">
@@ -208,6 +220,7 @@
       <workItem from="1704956936052" duration="24000" />
       <workItem from="1706160456199" duration="8258000" />
       <workItem from="1706229378597" duration="12308000" />
+      <workItem from="1706496412982" duration="10009000" />
     </task>
     <servers />
   </component>
