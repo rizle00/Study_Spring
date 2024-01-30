@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -195,6 +196,19 @@ private String email_pw;
         return upload.replace("d://app/upload", fileURL(request))+fileName;
     }
 
+//    다중 파일 업로드
+    public ArrayList<FileVO> multipleFileUpload(String category, MultipartFile[] files, HttpServletRequest request){
+        ArrayList<FileVO> list = null;
+        for(MultipartFile file : files){
+            if(file.isEmpty()) continue;;
+            if(list == null) list = new ArrayList<FileVO>();
+            FileVO vo = new FileVO();
+            vo.setFilename(file.getOriginalFilename());
+            vo.setFilepath(fileUpload(category, file, request));
+            list.add(vo);
+        }
+        return list;
+    }
 
 
 //    파일 다운로드

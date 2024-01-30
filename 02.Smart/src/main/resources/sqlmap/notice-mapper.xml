@@ -8,14 +8,19 @@
 --         on writer = user_id
 --         order by no desc
     select * from
-    (select row_number() over(order by id) no, n.*, m.name from notice n
+    (select row_number() over(order by root, step desc) no, n.*, m.name from notice n
      left outer join member m
      on writer = user_id
      <include refid="searchWhere"/>
       ) n
     where no between #{beginList} and #{endList}
-    order by id desc
+    order by no desc
     </select>
+    <!--
+select name, n.*
+from notice n left outer join member m on n.writer = m.user_id
+order by id
+-->
     <select id="totalList" resultType="integer">
         select count(*) from notice
         <include refid="searchWhere"></include>

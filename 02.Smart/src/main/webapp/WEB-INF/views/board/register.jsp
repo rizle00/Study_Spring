@@ -31,13 +31,16 @@
                 <div class="row">
                     <div class="col-auto d-flex file-info">
                         <label>
-                            <input class="form-control" id="file-single" type="file" name="file">
-                            <i class="fa-solid fa-file-circle-plus fs-2"></i>
+                            <input class="form-control" id="file-multiple" type="file" name="file" multiple>
+                            <i role="button" class="fa-solid fa-file-circle-plus fs-2"></i>
                         </label>
-                        <div class="d-flex align-items-center">
-                            <span class="file-name"></span>
-                            <i role="button" class="d-none text-danger ms-4 fa-solid fa-trash fs-2 file-delete"></i>
+                        <div class="form-control py-2 mt-2 file-drag">
+                            <div class="py-3 text-center">첨부할 파일을 마우스로 끌어오세요</div>
                         </div>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <span class="file-name"></span>--%>
+<%--                            <i role="button" class="d-none text-danger ms-4 fa-solid fa-trash fs-2 file-delete"></i>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
             </td>
@@ -51,9 +54,15 @@
     <button class="btn btn-outline-dark px-4" id="btn-cancel">취소</button>
 </div>
 <script>
+    var fileList = new FileList();
+    // var test ="abc";
+    // var tag = `<span>\${test}</span>`백틱
     $("#btn-save").click(function () {
+
+        return;
         if (emptyCheck()) {
             // 입력이 되어 있는 경우만 서브밋
+            multipleFileUpload();
             $("form").submit();
         }
     })

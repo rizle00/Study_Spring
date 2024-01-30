@@ -48,7 +48,7 @@ public class BoardController {
     }
 
     @RequestMapping("/insert")
-    public String insert(BoardVO vo, MultipartFile file, HttpServletRequest request){
+    public String insert(BoardVO vo, MultipartFile[] files, HttpServletRequest request){
 //        파일을 첨부한 경우
 //        if(!file.isEmpty()){
 //            filevo.setFilename(file.getOriginalFilename());
@@ -57,6 +57,7 @@ public class BoardController {
 //
 //        }
 //        화면에서 입력한 정보로 DB에 신규 저장처리 후 목록화면으로 연결\
+        vo.setFileList(common.multipleFileUpload("board", files, request));
         service.board_register(vo);
         return "redirect:list";
     }

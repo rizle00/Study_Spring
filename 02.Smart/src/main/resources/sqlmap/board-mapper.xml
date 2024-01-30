@@ -58,11 +58,17 @@ order by no desc
         insert into board
             (title, content, writer)
         values (#{title}, #{content}, #{writer})
+        <selectKey keyProperty="id" resultType="integer" order="AFTER">
+            select seq_board.currval from dual
+        </selectKey>
     </insert>
-    <insert id="file">
-        insert into board_file
+
+    <insert id="fileInsert">
+<foreach collection="fileList" item="file" open="insert all" separator=" " close="select * from dual">
+        into board_file
             (filename, filepath, board_id)
-        values (#{filename , jdbcType=VARCHAR}, #{filepath , jdbcType=VARCHAR}, #{board_id})
+        values (#{file.filename}, #{file.filepath}, #{id})
+</foreach>
     </insert>
 
 

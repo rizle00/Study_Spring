@@ -15,7 +15,11 @@ public class BoardService {
 
 //    신규 방명록 글 저장
     public int board_register(BoardVO vo){
-        return sql.insert("board.register", vo);
+        int dml = sql.insert("board.register", vo);
+        if(dml ==1 && vo.getFileList()!= null ){
+            sql.insert("board.fileInsert", vo);
+        }
+        return dml;
     }
 
 //    방명록 글 목록 조회

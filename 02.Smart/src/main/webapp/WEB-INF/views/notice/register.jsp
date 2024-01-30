@@ -32,7 +32,7 @@
                     <div class="col-auto d-flex file-info">
                         <label>
                             <input class="form-control" id="file-single" type="file" name="file">
-                            <i class="fa-solid fa-file-circle-plus fs-2"></i>
+                            <i role="button" class="fa-solid fa-file-circle-plus fs-2"></i>
                         </label>
                         <div class="d-flex align-items-center">
                             <span class="file-name"></span>

@@ -1,5 +1,6 @@
 
 
+// $(document).ready()의 약식
 $(function (){
 
     if($(".date").length>0){
@@ -77,16 +78,111 @@ $(function (){
             }
             console.log('attached>', attached)
         }
-    })
+    });
     $(".file-delete").click(function (){
         // var _info =$(this).closest(".file-info")
         // _info.find(".file-preview").empty();
         // _info.find("input[type=file]").val("");
         // $(this).addClass("d-none");
         initFileInfo($(this))
+    });
+
+    $(".file-drag")
+        .on("dragover dragleave drop", function (e) {
+        e.preventDefault();// 드롭을 허용하기 위해 기본 동작 취소
+        //드래그 오버시 입력태그에 커서 있을 때 처럼 적용하기
+        if(e.type == "dragover") $(this).addClass("drag-over");
+        else $(this).removeClass("drag-over");
     })
+        .on("drop", function (e) {
+            // console.log("e>", e);
+            // console.log("e>", e.originalEvent.dataTransfer.files);
+            var files = filterFolder(e.originalEvent.dataTransfer);
+
+            $(files).each(function () {
+                fileList.setFile(this);
+            });
+            // console.log('fileList>', fileList);
+            fileList.showFile();
+        })
+    $("body").on("dragover dragleave drop", function (e) {
+        e.preventDefault();
+    });
+
+    $("#file-multiple").on("change", function () {
+       var files = this.files;
+       $(files).each(function () {
+           fileList.setFile(this)
+       })
+        fileList.showFile();
+    });
 
 })
+// 파일 관련 처리
+function FileList(){
+    this.files = [];
+    this.setFile = function (file){
+        this.files.push(file);
+    }
+    this.getFile = function () {
+        return this.files;
+    }
+//     해당 파일항목 삭제
+//     slice(시작, 끝) : 시작위치에서 끝위치-1 까지를 반화, 끝 파라미터 생략가능, 원래데이터는 그대로 유지
+//     splice(시작, 갯수) : 시작 위치에서 지정 갯수 만큼 제거. 원래 데이터가 바뀜
+    this.removeFile = function (i) {
+        this.files.splice(i,1);//1개씩 제거
+
+    }
+    this.showFile = function () {
+        var tag = "";
+        if(this.files.length>0){//파일 목록에 파일이 있는 경우
+            for(i = 0; i<this.files.length; i++){
+                tag +=`
+                <div class="file-item d-flex gap-2 my-1">
+                    <button type="button" class="btn-close small" data-seq="${i}"></button>
+                    <span>${this.files[i].name}</span>
+                </div>`;
+            }
+        } else {//없는 경우
+          tag =  `<div class="py-3 text-center">첨부할 파일을 마우스로 끌어오세요</div>`;
+        }
+        $(".file-drag").html(tag);
+    }
+}
+function multipleFileUpload(){
+//     FileList 객체의 files의 파일정보를 input file태그에 넣기
+    var transfer = new DataTransfer();
+    var files = fileList.getFile();
+    if(files.length>0){
+        for(i=0; i<files.length; i++){
+            transfer.items.add(files[i]);
+        }
+    }
+    console.log('transfer>', transfer.files);
+    $("#file-multiple").prop("files", transfer.files);
+}
+//폴더 제한
+function filterFolder(transfer) {
+    var files = [], folder = false;
+    for(i=0; i<transfer.items.length; i++){
+       var entry = transfer.items[i].webkitGetAsEntry();
+       // console.log('idx>',entry);
+       if(entry.isFile) files.push(transfer.files[i]);
+       else folder = true;
+    }
+    if(folder){
+        alert("폴더는 첨부할 수 없습니다!");
+    }
+    return files;
+}
+
+$(document)// 삭제 처리
+    .on("click", ".file-item .btn-close", function () {
+       console.log($(this).data("seq"));
+       fileList.removeFile($(this).data("seq"));
+       fileList.showFile();
+    })
 
 //이미지 판단
 function isImg (filename){
