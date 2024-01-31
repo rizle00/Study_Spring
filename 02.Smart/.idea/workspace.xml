@@ -11,16 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb782727-13bd-4263-88b8-525a562321db" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/modify.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/include/redirect.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/board/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/board/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/CommonUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/common/CommonUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/smart/board/BoardVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/smart/board/BoardVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/board-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/board-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/notice-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/typeConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/typeConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/info.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/list.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/register.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/register.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/common.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,11 +66,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Tomcat Server.Tomcat 9.0.82.executor": "Debug",
+    "Tomcat Server.Tomcat 9.0.82.executor": "Run",
     "Tomcat Server.register.jsp.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Project/Project_HealthKeeper/App",
+    "last_opened_file_path": "D:/Study_Spring/02.Smart/src/main/webapp/WEB-INF/views/board",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,8 +86,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\board" />
-      <recent name="D:\Study_Spring\02.Smart\src\main\resources\sqlmap" />
       <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\include" />
+      <recent name="D:\Study_Spring\02.Smart\src\main\resources\sqlmap" />
       <recent name="D:\Study_Spring\02.Smart\src\main\webapp\WEB-INF\views\notice" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -216,6 +217,7 @@
       <workItem from="1706496412982" duration="10009000" />
       <workItem from="1706510535831" duration="60000" />
       <workItem from="1706575433576" duration="12849000" />
+      <workItem from="1706661446095" duration="14897000" />
     </task>
     <servers />
   </component>

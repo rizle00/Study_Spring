@@ -7,8 +7,16 @@
         <include refid="searchWhere"/>
     </select>
 
+    <select id="fileList" resultType="file">
+        select * from board_file where board_id = #{id}
+    </select>
+
+    <select id="fileInfo" resultType="file">
+        select * from board_file where id = #{id}
+    </select>
+
     <select id="list" resultType="board">
-select *
+select (select count(*) from board_file f where f.board_id = b.id) filecnt, b.*
 from  ( select b.*, name, row_number() over(order by id) no
         from board b
             left outer join member m
@@ -70,6 +78,10 @@ order by no desc
         values (#{file.filename}, #{file.filepath}, #{id})
 </foreach>
     </insert>
+    <delete id="delete">
+        delete from board
+        where id = #{id}
+    </delete>
 
 
 

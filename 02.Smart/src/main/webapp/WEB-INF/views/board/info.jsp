@@ -39,13 +39,16 @@
     <tr>
         <th>첨부파일</th>
         <td colspan="5">
-<%--            <c:if test="${!empty vo.filename}">--%>
-<%--                <div class="row">--%>
-<%--                    <div class="col-auto">--%>
-<%--                        <span> ${vo.filename}</span> <i role="button" class="file-download fa-solid fa-download ms-2"></i>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </c:if>--%>
+            <c:if test="${!empty vo.fileList}">
+                <c:forEach items="${vo.fileList}" var="f">
+                <div class="row py-2">
+                    <div class="col-auto">
+                        <span>${f.filename} </span>
+                        <i role="button" data-file="${f.id}" class="file-download fa-solid fa-download ms-2"></i>
+                    </div>
+                </div>
+                </c:forEach>
+            </c:if>
         </td>
     </tr>
 
@@ -61,26 +64,50 @@
     </c:if>
 
 </div>
-<c:set var="params" value="curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}"/>
+<%--<c:set var="params" value="curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}"/>--%>
+
+<form method="post">
+    <input type="hidden" name="id" value="${vo.id}" id="in">
+    <input type="hidden" name="curPage" value="${page.curPage}">
+    <input type="hidden" name="search" value="${page.search}">
+    <input type="hidden" name="keyword" value="${page.keyword}">
+    <input type="hidden" name="pageList" value="${page.pageList}">
+</form>
 <script>
-    $("#btn-list").click(function () {
-        location = "list?${params}";
-    });
+    <%--$("#btn-list").click(function () {--%>
+    <%--    location = "list?${params}";--%>
+    <%--});--%>
 
-    $("#btn-modify").click(function () {
-        location = "modify?id=${vo.id}&${params}"
-    });
+    <%--$("#btn-modify").click(function () {--%>
+    <%--    location = "modify?id=${vo.id}&${params}"--%>
+    <%--});--%>
 
-    $("#btn-delete").click(function () {
-       if(confirm("정말 삭제 하시겠습니까?")){
-           location = "delete?id=${vo.id}&${params}"
-       }
-    });
+    <%--$("#btn-delete").click(function () {--%>
+    <%--   if(confirm("정말 삭제 하시겠습니까?")){--%>
+    <%--       location = "delete?id=${vo.id}&${params}"--%>
+    <%--   }--%>
+    <%--});--%>
 
     $(".file-download").click(function (){
-        location="download?id=${vo.id}";
-    })
+        // location="download?id=$(this).data("file")";
+        // var file = $(this).data("file");
+        // location = `download?id=\${file}`;
+        $("[name = id]").val($(this).data("file"));
+        $("form").attr("action", "download").submit();
+    });
 
+    $("#btn-list, #btn-modify, #btn-delete").click(function () {
+        var id = $(this).attr("id");
+        id = id.substr(id.indexOf("-")+1);
+        $("form").attr("action", id);
+        if( id == "delete"){
+            if(confirm("정말 삭제하시겠습니까?")){
+                $("form").submit();
+            }
+        }else $("form").submit();
+
+    });
+    // $("#in").attr("name", "")
 </script>
 
 </body>

@@ -1,5 +1,6 @@
 package kr.co.smart.board;
 
+import kr.co.smart.common.FileVO;
 import kr.co.smart.common.PageVO;
 import kr.co.smart.notice.NoticeVO;
 import org.apache.ibatis.session.SqlSession;
@@ -24,14 +25,26 @@ public class BoardService {
 
 //    방명록 글 목록 조회
     public PageVO board_list(PageVO page){
-       page.setTotalList(sql.selectOne("board.totalList"));
+       page.setTotalList(sql.selectOne("board.totalList", page));
        page.setList(sql.selectList("board.list", page));
         return page;
     }
 
 //   선택한 방명록 글 정보 조회
     public BoardVO board_info(int id){
-        return sql.selectOne("board.info", id);
+
+        BoardVO vo = sql.selectOne("board.info", id);
+        vo.setFileList(sql.selectList("board.fileList", id));
+        return vo;
+    }
+//  파일 정보 조회
+
+    public FileVO board_file_info(int id){
+        return sql.selectOne("board.fileInfo",id);
+    }
+//    파일 목록 조회
+    public List<FileVO> board_file_list(int id){
+        return sql.selectList("board.fileList", id);
     }
 
 
@@ -47,7 +60,7 @@ public class BoardService {
 
 //    방명록 글 정보 삭제
     public int board_delete(int id){
-        return sql.delete("notice.delete", id);
+        return sql.delete("board.delete", id);
     }
 
 }

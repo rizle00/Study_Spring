@@ -25,6 +25,13 @@
                 <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
+        <div class="col-auto">
+            <select name="pageList" class="form-select">
+                <c:forEach var="i" begin="1" end="5">
+                    <option value="${10*i}">${10*i}개 씩</option>
+                </c:forEach>
+            </select>
+        </div>
         <%--   로그인 되어 있는 경우만--%>
         <c:if test="${!empty loginInfo}">
             <div class="col-auto">
@@ -32,6 +39,7 @@
             </div>
         </c:if>
     </div>
+    <input type="hidden" name="id">
 </form>
 
 <table class="table tb-list">
@@ -41,7 +49,7 @@
         <col width='120px'>
         <col width='120px'>
         <col width='100px'>
-        <col width='100px'>
+
     </colgroup>
     <tr>
         <th>번호</th>
@@ -49,30 +57,43 @@
         <th>작성자</th>
         <th>작성일자</th>
         <th>조회수</th>
-        <th>첨부파일</th>
     </tr>
 
     <c:if test="${empty page.list}">
         <tr>
-            <td colspan="6">방명록 글이 없습니다</td>
+            <td colspan="5">방명록 글이 없습니다</td>
         </tr>
     </c:if>
     <c:if test="${not empty page.list}">
     <c:forEach items="${page.list}" var="vo">
     <tr>
         <td>${vo.no}</td>
-        <td class="text-start"><a class="text-link"
-                                  href="info?id=${vo.id}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}">
-                ${vo.title}</a></td>
+        <td class="text-start">
+            <a class="text-link" href="javascript:info(${vo.id})">
+                ${vo.title}</a>
+            <c:if test="${vo.filecnt gt 0}"><i class="fa-solid fa-paperclip"></i></c:if>
+        </td>
         <td>${vo.name}</td>
         <td>${vo.writedate}</td>
         <td>${vo.readcnt}</td>
-<%--        <td><c:if test="${!empty vo.fileList.filename}"><i class="fa-solid fa-paperclip"></i></c:if></td>--%>
+
     </tr>
     </c:forEach>
     </c:if>
-
+<%--    ?id=${vo.id}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}--%>
 </table>
 <jsp:include page="/WEB-INF/views/include/page.jsp"/>
+<script>
+    $("[name=pageList]").change(function () {
+        $("form").submit();
+    } );
+    $("[name=pageList]").val(${page.pageList}).prop("selected", true);
+    function info(id){
+    $("[name=id]").val(id);
+    $("[name=curPage]").val(${page.curPage});
+
+    $("form").attr("action","info").submit();
+    }
+</script>
 </body>
 </html>
