@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,34 +65,35 @@
         </tr>
     </c:if>
     <c:if test="${not empty page.list}">
-    <c:forEach items="${page.list}" var="vo">
-    <tr>
-        <td>${vo.no}</td>
-        <td class="text-start">
-            <a class="text-link" href="javascript:info(${vo.id})">
-                ${vo.title}</a>
-            <c:if test="${vo.filecnt gt 0}"><i class="fa-solid fa-paperclip"></i></c:if>
-        </td>
-        <td>${vo.name}</td>
-        <td>${vo.writedate}</td>
-        <td>${vo.readcnt}</td>
+        <c:forEach items="${page.list}" var="vo">
+            <tr>
+                <td>${vo.no}</td>
+                <td class="text-start">
+                    <a class="text-link" href="javascript:info(${vo.id})">
+                            ${vo.title}</a>
+                    <c:if test="${vo.filecnt gt 0}"><i class="fa-solid fa-paperclip"></i></c:if>
+                </td>
+                <td>${vo.name}</td>
+                <td>${vo.writedate}</td>
+                <td>${vo.readcnt}</td>
 
-    </tr>
-    </c:forEach>
+            </tr>
+        </c:forEach>
     </c:if>
-<%--    ?id=${vo.id}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}--%>
+    <%--    ?id=${vo.id}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}--%>
 </table>
 <jsp:include page="/WEB-INF/views/include/page.jsp"/>
 <script>
     $("[name=pageList]").change(function () {
         $("form").submit();
-    } );
+    });
     $("[name=pageList]").val(${page.pageList}).prop("selected", true);
-    function info(id){
-    $("[name=id]").val(id);
-    $("[name=curPage]").val(${page.curPage});
 
-    $("form").attr("action","info").submit();
+    function info(id) {
+        $("[name=id]").val(id);
+        $("[name=curPage]").val(${page.curPage});
+
+        $("form").attr("action", "info").submit();
     }
 </script>
 </body>

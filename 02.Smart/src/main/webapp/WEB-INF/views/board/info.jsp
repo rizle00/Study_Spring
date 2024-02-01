@@ -72,7 +72,9 @@
     <input type="hidden" name="search" value="${page.search}">
     <input type="hidden" name="keyword" value="${page.keyword}">
     <input type="hidden" name="pageList" value="${page.pageList}">
+    <input type="hidden" name="url" value="board/info">
 </form>
+<jsp:include page="comment.jsp"/>
 <script>
     <%--$("#btn-list").click(function () {--%>
     <%--    location = "list?${params}";--%>

@@ -31,7 +31,7 @@ public class HomeController {
 		MemberVO vo = member.member_info(user_id);
 		vo.setRole("admin");
 		if(pwEncoder.matches(user_pw, vo.getUser_pw())){
-			session.setAttribute("loginInfo",vo);
+//			session.setAttribute("loginInfo",vo);
 //			session 에 세팅
 
 		}

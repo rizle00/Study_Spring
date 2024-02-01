@@ -15,6 +15,10 @@
         select * from board_file where id = #{id}
     </select>
 
+    <select id="removeFileList" resultType="file">
+        select * from board_file where id in (${remove})
+    </select>
+
     <select id="list" resultType="board">
 select (select count(*) from board_file f where f.board_id = b.id) filecnt, b.*
 from  ( select b.*, name, row_number() over(order by id) no
@@ -82,7 +86,13 @@ order by no desc
         delete from board
         where id = #{id}
     </delete>
-
+    <update id="update">
+        update board set title = #{title}, content = #{content}
+                         where id = #{id}
+    </update>
+    <delete id="fileDelete">
+        delete from board_file where id in(${remove})
+    </delete>
 
 
 </mapper>
