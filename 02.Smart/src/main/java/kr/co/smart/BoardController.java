@@ -1,16 +1,18 @@
 package kr.co.smart;
 
 
+import kr.co.smart.board.BoardCommentVO;
 import kr.co.smart.board.BoardService;
 import kr.co.smart.board.BoardVO;
 import kr.co.smart.common.CommonUtility;
 import kr.co.smart.common.FileVO;
 import kr.co.smart.common.PageVO;
-import kr.co.smart.notice.NoticeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -123,5 +125,22 @@ public class BoardController {
         model.addAttribute("page", page);
 
         return "include/redirect";
+    }
+
+    //   댓글 등록 저장 처리 요청
+    @ResponseBody
+    @RequestMapping("/comment/register")
+    public boolean comment_register(BoardCommentVO vo) {
+        return service.board_comment_register(vo) == 1 ? true : false;
+
+    }
+
+    //댓글 목록 조회
+    @RequestMapping("/comment/list/{board_id}")
+    public String commentList(@PathVariable int board_id, Model model) {
+        model.addAttribute("list", service.board_comment_list(board_id));
+        model.addAttribute("crlf", "\r\n");
+        model.addAttribute("lf", "\n");
+        return "board/comment/comment_list";
     }
 }

@@ -1,47 +1,117 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div id = "comment-regist" class="my-4 justify-content-center">
-    <div class="w-pct80 justify-content-between d-flex mb-2">
-        <span>댓글 작성  [  <span id="writing">0</span> / 200 ]</span>
+<div id="comment-regist" class="row my-4 justify-content-center">
+    <div class="w-pct80 justify-content-between d-flex pb-2 h-px40">
+        <span>댓글 작성  [  <span class="writing">0</span> / 200 ]</span>
         <a class="btn btn-outline-dark btn-sm d-none btn-register">등록</a>
     </div>
     <div class="comment w-pct80">
         <div class="form-control py-3 text-center guide">
-         ${empty loginInfo ? "댓글을 입력하려면 여기를 클릭 후 로그인하세요" : "댓글을 입력하세요"}
+            ${empty loginInfo ? "댓글을 입력하려면 여기를 클릭 후 로그인하세요" : "댓글을 입력하세요"}
         </div>
     </div>
 </div>
 
+<div id="comment-list" class="row justify-content-center mx-0">
+</div>
+
 <script>
+commentList();
+    //댓글 등록 부분 초기화
+    function initComment() {
+        $("#comment-regist .writing").text(0);
+        $(".btn-register").addClass("d-none");
+        $("#comment-regist .comment").html(
+            `<div class="form-control py-3 text-center guide">
+            ${empty loginInfo ? "댓글을 입력하려면 여기를 클릭 후 로그인하세요" : "댓글을 입력하세요"}
+        </div>`);
+
+    }
+
+    // 댓글 목록 조회
+    function commentList() {
+
+        $.ajax({
+            url: "comment/list/${vo.id}",
+
+        }).done(function (response) {
+            console.log(response);
+            $("#comment-list").html(response);
+    })
+    }
+
+
+    $(".btn-register").click(function () {
+
+        $.ajax({
+            url: "comment/register",
+            data: {// 파라미터...
+                board_id:${vo.id}, content: $("#comment-regist textarea").val(),
+                writer: "${loginInfo.user_id}"
+            },
+        }).done(function (response) {
+            if (response) {
+                alert("댓글이 등록되었습니다");
+                initComment();
+                commentList();
+            } else {
+                alert("댓글 등록 실패...");
+
+            }
+        })
+    })
+
+
     $("#comment-regist .comment").click(function () {
-        if(${empty loginInfo}){
-            if(confirm("로그인 하시겠습니까?")){
+        if (${empty loginInfo}) {
+            if (confirm("로그인 하시겠습니까?")) {
                 $("form").attr("action", "<c:url value='/member/login' />").submit();
             }
-        }else{
+        } else {
             //클릭시마다 textarea 가 추가되지 않도록 가이드가 있을때만 추가
-            if($(this).children(".guide").length == 1){
-            $(this).append("<textarea class='form-control'></textarea>");
-            $(this).children("textarea").focus();
-            $(this).children(".guide").remove();
+            if ($(this).children(".guide").length == 1) {
+                $(this).append("<textarea class='form-control'></textarea>");
+                $(this).children("textarea").focus();
+                $(this).children(".guide").remove();
             }
         }
     })
     $(document)
-    .on("keyup input", "#comment-regist textarea", function () {
-        var input = $(this).val();
-        if(input.length>200){
-            alert("최대 200자까지 입력할 수 있습니다");
-            input = input.substr(0,200);//200자까지의 내용만 놔둠
-            $(this).val(input);
-        }
-        $("#writing").text(input.length);
-        if(input.length>0){
-            $(".btn-register").removeClass("d-none");
-        } else $(".btn-register").addClass("d-none");
+        .on("keyup input", "#comment-regist textarea", function () {
+            // var input = $(this).val();
+            // if (input.length > 200) {
+            //     alert("최대 200자까지 입력할 수 있습니다");
+            //     input = input.substr(0, 200);//200자까지의 내용만 놔둠
+            //     $(this).val(input);
+            // }
+            var input = writing($(this));
+            $("#comment-regist .writing").text(input.length);
+            if (input.length > 0) {
+                $(".btn-register").removeClass("d-none");
+            } else $(".btn-register").addClass("d-none");
+        }).on("contextmenu", "#comment-regist textarea", function (e) {
+        e.preventDefault();//우클릭 방지
+    }).on("keyup", "#comment-list textarea", function () {
+        var input = writing($(this));
+        $(this).closest(".comment").find(".writing").text(input.length);
     })
+function writing(tag) {
+    var input = tag.val();
+    if (input.length > 200) {
+        alert("최대 200자까지 입력할 수 있습니다");
+        input = input.substr(0, 200);//200자까지의 내용만 놔둠
+        tag.val(input);
+    }
+    return input;
+}
 </script>
 <style>
-    .comment textarea {height: 90px}
+    .comment textarea {
+        height: 90px
+    }
+
+    .h-px40 {
+        height: 40px
+    }
 </style>

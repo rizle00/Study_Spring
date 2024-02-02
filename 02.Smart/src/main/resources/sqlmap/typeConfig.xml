@@ -13,5 +13,7 @@
         <typeAlias type="kr.co.smart.notice.NoticeVO" alias="notice"/>
         <typeAlias type="kr.co.smart.board.BoardVO" alias="board"/>
         <typeAlias type="kr.co.smart.common.FileVO" alias="file"/>
+        <typeAlias type="kr.co.smart.board.BoardCommentVO" alias="comment"/>
+
     </typeAliases>
 </configuration>

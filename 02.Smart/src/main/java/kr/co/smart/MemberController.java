@@ -67,7 +67,7 @@ public class MemberController {
         }
 
         session.setAttribute("category", "login");
-        return "default/member/login";
+        return "default/member/login";// 타일즈 적용
     }
 
 //    @ResponseBody

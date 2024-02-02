@@ -93,6 +93,16 @@ order by no desc
     <delete id="fileDelete">
         delete from board_file where id in(${remove})
     </delete>
-
+    <insert id="commentRegister">
+        insert into board_comment (board_id, content, writer)
+        values (#{board_id}, #{content}, #{writer})
+    </insert>
+    <select id="commentList" resultType="comment">
+        select c.*, name, profile
+        from board_comment c
+                 left outer join member m on c.writer = m.user_id
+        where board_id = #{board_id}
+        order by writedate desc
+    </select>
 
 </mapper>

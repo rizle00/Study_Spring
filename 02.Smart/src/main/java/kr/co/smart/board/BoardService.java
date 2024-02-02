@@ -79,4 +79,21 @@ public class BoardService {
         return sql.delete("board.delete", id);
     }
 
+//    댓글 등록 저장 처리
+    public int board_comment_register(BoardCommentVO vo){
+        return sql.insert("board.commentRegister", vo);
+    }
+    //    댓글  변경 저장 처리
+    public int board_comment_update(BoardCommentVO vo){
+        return 0;
+    }
+//    댓글 삭제 처리
+    public int board_comment_delete(int id){
+        return 0;
+    }
+//    댓글 목록 조회
+    public List<BoardCommentVO> board_comment_list(int board_id){
+        return sql.selectList("board.commentList", board_id);
+    }
+
 }
