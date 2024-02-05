@@ -65,7 +65,7 @@ $(function () {
                     }
                 }
             } else {
-                console.log($(this).val())
+                // console.log($(this).val())
                 if ($(this).hasClass("image-only")) {
 
                     initFileInfo($(this))
@@ -75,7 +75,7 @@ $(function () {
                 // _preview.children("img").remove();
                 // $(this).val("");
             }
-            console.log('attached>', attached)
+            // console.log('attached>', attached)
         }
     });
     $(".file-delete").click(function () {
@@ -241,4 +241,62 @@ function emptyCheck() {
         }
     })
     return ok;
+}
+
+function makePage(totalList, curPage) {
+    $(".pagination").closest("nav").remove();
+
+    page.totalList = totalList;
+    page.curPage = curPage;
+    page.totalPage = Math.ceil(totalList / page.pageList);
+    page.totalBlock = Math.ceil(page.totalPage / page.blockPage);
+    page.curBlock = Math.ceil(page.curPage / page.blockPage);
+    page.endPage = page.curBlock * page.blockPage;
+    page.beginPage = page.endPage - (page.blockPage - 1);
+    if (page.totalPage < page.endPage) page.endPage = page.totalPage;
+    // console.log(page);
+    // return;
+    var prev = page.curBlock > 1 ? "" : "d-none";
+    var next = page.curBlock < page.totalBlock ? "" : "d-none";
+    var pages ="";
+    for( var no = page.beginPage; no<page.endPage; no++){
+        if(no == page.curPage) {
+           pages += `<li class="page-item"><a class="page-link active ">${no}</a></li>`;
+        } else {
+           pages += `<li class="page-item"><a class="page-link " data-page="${no}" >${no}</a></li>`;
+        }
+    }
+
+    var nav
+        = `<nav aria-label="Page navigation example">
+                 <ul class="pagination mt-4 justify-content-center">
+                    <li class="page-item ${prev}">
+                        <a class="page-link" data-page = "1">
+                            <i class="fa-solid fa-backward"></i>
+                        </a>
+                    </li>
+                    <li class="page-item ${prev}">
+                        <a class="page-link" data-page = "${page.beginPage - page.blockPage}">
+                            <i class="fa-solid fa-caret-left"></i>
+                        </a>
+                    </li>
+                    ${pages}
+
+                    <li class="page-item ${next}">
+                        <a class="page-link" data-page = "${page.endPage + 1}">
+                            <i class="fa-solid fa-caret-right"></i>
+
+                        </a>
+                    </li>
+                    <li class="page-item ${next}">
+                        <a class="page-link" data-page = "${page.totalPage}">
+                            <i class="fa-solid fa-forward"></i>
+
+                        </a>
+                    </li>
+
+                 </ul>
+                </nav>`;
+
+    $("#data-list").after(nav);
 }

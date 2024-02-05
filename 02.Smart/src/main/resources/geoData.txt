@@ -1,0 +1,2 @@
+https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?_type=json&ServiceKey=yPncuEh0h1ECE8ycuGrK%2BPEj4lAz18qKEMrb9izI3MPvr1dBaFuxZNMGAdYN2JokEfvTAPp1qQB8roDsSfKZPw%3D%3D
+_type=json -> json타입으로 자료 받기
