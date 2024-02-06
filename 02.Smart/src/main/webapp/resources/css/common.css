@@ -5,6 +5,7 @@ body * {  vertical-align: middle;}
 a:link, a:visited { text-decoration: none; color: inherit;}
 
 a.text-link:hover {text-decoration: underline; font-weight: bold;}
+a.text-link { text-decoration: none; color: initial}
 
 table { border-top: 2px solid #6610f2 !important;}
 table th { background-color: #76b2ff !important;}
