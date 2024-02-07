@@ -10,9 +10,14 @@
 <style>
     .popfile {width: 120px; height: 120px;}
 </style>
-
+<c:set var="response" value="${list.response.body}"/>
+<c:if test="${empty response.items.item}">
+<table class="table tb-list empty">
+    <tr><th></th></tr>
+    <tr><td>${ empty list.response.header.errorMsg ? "동물 정보가 없습니다" : list.response.header.errorMsg}</td></tr>
+</table>
+</c:if>
 <c:forEach items="${list.response.body.items.item}" var="vo">
-
 
 <table class="table tb-list animal">
     <colgroup>
@@ -47,13 +52,23 @@
 </table>
 </c:forEach>
 <script>
+    if(${empty list.response.body.items.item}){
+        var path = "";
+        $(".animal-top select").each(function () {
+            if($(this).val() != ""){
+               var item = $(this).find("option:selected").text();
+              path += `<span class="me-2">\${item}</span>`;
+            }
+        });
+        $("table.empty th").html(path);
+    }
     $(".popfile").click(function () {
         $("#modal-map .modal-body").html($(this).clone());
-        $("#modal-map img").removeClass("popfile");
+        $("#modal-map img").removeClass("popfile").addClass("w-pct100");
         new bootstrap.Modal($("#modal-map")).show();
     })
 
-    makePage(${list.response.body.totalCount}, ${list.response.body.pageNo});
+    makePage(${ empty list.response.header.errorMsg ? list.response.body.totalCount : 0}, ${list.response.body.pageNo});
 </script>
 </body>
 </html>

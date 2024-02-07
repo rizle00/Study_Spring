@@ -12,21 +12,21 @@
 <h3 class="mb-4"> 공공데이터 목록 </h3>
 <ul class="nav nav-pills justify-content-center mb-3">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" >약국조회</a>
+        <a class="nav-link active" aria-current="page">약국조회</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" >유기동물조회</a>
+        <a class="nav-link">유기동물조회</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" >기타조회</a>
+        <a class="nav-link">기타조회</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" >기타조회</a>
+        <a class="nav-link">기타조회</a>
     </li>
 </ul>
 <div class="row mb-2 justify-content-sm-between mb-1">
 
-    <div class="col-auto animal-top">
+    <div class="col-auto d-flex gap-2 animal-top">
     </div>
     <div class="col-auto">
         <select id="pageList" class="form-select">
@@ -41,8 +41,9 @@
 
 </div>
 <jsp:include page="/WEB-INF/views/include/modal.jsp"/>
+<jsp:include page="/WEB-INF/views/include/loading.jsp"/>
 <div id="map" style="width:668px;height:700px;"></div>
-
+<script src="<c:url value='/js/animal.js'/> "></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd560cb2c1d566b1339c4e0f4073ddf4"></script>
 <script>
     $("ul.nav-pills li").click(function () {
@@ -61,32 +62,32 @@
 
     $(document)
         .on("click", ".pagination li a", function () {
-            if($("table.pharmacy").length>0){
+            if ($("table.pharmacy").length > 0) {
 
-            pharmacy_list($(this).data("page"));// 현재페이지 바뀜처리
+                pharmacy_list($(this).data("page"));// 현재페이지 바뀜처리
             } else
                 animal_list($(this).data("page"))
         })
         .on("click", ".map", function () {
-            if($(this).data("x") != "undefined" && $(this).data("y") != "undefined"){
+            if ($(this).data("x") != "undefined" && $(this).data("y") != "undefined") {
 
-            showKakaoMap($(this));
-            } else{
+                showKakaoMap($(this));
+            } else {
                 alert("위치 정보가 없어 지도에 표시할 수 없습니다")
             }
         })
+
     function showKakaoMap(tag) {
         $("#map").remove();
         $("#modal-map").after(`<div id="map" style="width:668px;height:700px;"></div>`);
         var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        var xy  = new kakao.maps.LatLng(tag.data("y"), tag.data("x"));
+        var xy = new kakao.maps.LatLng(tag.data("y"), tag.data("x"));
         var options = { //지도를 생성할 때 필요한 기본 옵션
             center: xy, //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
         };
 
         var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
 
 
 // 마커를 생성합니다
@@ -103,8 +104,8 @@
 // 인포윈도우를 생성합니다
         var name = tag.text();
         var infowindow = new kakao.maps.InfoWindow({
-            position : iwPosition,
-            content : `<div style="padding:5px;" class="text-danger fw-bold" >\${name}</div>`
+            position: iwPosition,
+            content: `<div style="padding:5px;" class="text-danger fw-bold" >\${name}</div>`
         });
 
 // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
@@ -116,14 +117,15 @@
     $("#pageList").change(function () {
         page.pageList = $(this).val();
 
-        if($("table.pharmacy").length>0){
+        if ($("table.pharmacy").length > 0) {
 
-        pharmacy_list(1);// 페이지 갯수 바뀔때 초기화
+            pharmacy_list(1);// 페이지 갯수 바뀔때 초기화
         } else animal_list(1);
     })
     // pharmacy_list();
     //약국 목록 조회
     function pharmacy_list(curPage) {
+        $(".animal-top").empty();
         var table =
             `<table class="table tb-list pharmacy">
             <colgroup>
@@ -143,7 +145,7 @@
         $("#data-list").html(table);
         $.ajax({
             url: "pharmacy",
-            data: {pageNo: curPage, numOfRows : page.pageList}// 바뀐페이지 정보로 요청
+            data: {pageNo: curPage, numOfRows: page.pageList}// 바뀐페이지 정보로 요청
         }).done(function (resp) {
             // console.log(resp);
             resp = resp.response.body;// 받아온 정보 안의 response 안의 body
@@ -163,34 +165,55 @@
         })
     }
 
-    
+
     var page = {pageList: 10, blockPage: 10};
 
 
-    // $(".map").click(function () {
-    //     alert("aa");
-    // })  안됨
     //유기 동물 목록 조회
     function animal_list(curPage) {
-    $.ajax({
-        url:"animal/list",
-        data: {pageNo: curPage, numOfRows: page.pageList}
-    }).done(function (resp) {
-        console.log(resp);
-        $("#data-list").html(resp);
-    });
+        $(".loading").removeClass("d-none");
 
 
+        if ($("#sido").length == 0) {
+            // 시도 조회
+            animal_sido();
+        }
 
-        // 시도 조회
-    animal_sido();
+        var animal = {};
+        animal.pageNo = curPage;
+        animal.numOfRows = page.pageList;
+        animal.sido = $("#sido").length == 1 ? $("#sido").val() : "";
+        animal.sigungu = $("#sigungu").length == 1 ? $("#sigungu").val() : "";
+        animal.shelter = $("#shelter").length == 1 ? $("#shelter").val() : "";
+        animal.upkind = $("#upkind").length == 1 ? $("#upkind").val() : "";
+        animal.kind = $("#kind").length == 1 ? $("#kind").val() : "";
+
+        $.ajax({
+            url: "animal/list",
+            // data: {pageNo: curPage, numOfRows: page.pageList}
+            data: JSON.stringify(animal),
+            type: 'post',
+            contentType: 'application/json'
+        }).done(function (resp) {
+            console.log(resp);
+            $("#data-list").html(resp);
+            setTimeout(function () {
+                $(".loading").addClass("d-none");
+            }, 500);
+        });
+
+
     }
+
+
     function animal_sido() {
         $.ajax({
-            url:"animal/sido",
+            url: "animal/sido",
+
         }).done(function (resp) {
 
             $(".animal-top").prepend(resp);
+            animal_type();
         });
 
     }
