@@ -23,6 +23,13 @@ public class HomeController {
 
 	@Autowired private MemberService member;
 	@Autowired private BCryptPasswordEncoder pwEncoder;
+
+	//    시각화 화면 요청
+	@RequestMapping("/visual/list")
+	public String list(HttpSession session){
+		session.setAttribute("category", "vi");
+		return "visual/list";
+	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session, Model model) {
