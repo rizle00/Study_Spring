@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -48,5 +50,17 @@ public class HomeController {
 		return "home";
 //		return "layout";
 	}
-	
+//	오류 발생 시 화면 연결
+	@RequestMapping("error")
+	public String error(HttpServletRequest request, Model model){
+
+//		오류 내용을 화면에 출력할 수 있도록 Model에 담기
+	int code = (int) request.getAttribute("javax.servlet.error.status_code");
+
+	if(code == 500){
+		Throwable exception = (Throwable) request.getAttribute("javax.servlet.error.exception");
+		model.addAttribute("error", exception.toString());
+	}
+		return "default/error/404"+(code == 404? 404 : "common");
+	}
 }
