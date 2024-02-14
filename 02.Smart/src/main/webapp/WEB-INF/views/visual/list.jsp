@@ -89,7 +89,7 @@
                      <span></span><font>\${i*10}명이상</font>
                   </li>`;
         var tag = `
-        <ul class="row d-flex justify-content-center" id="legend">
+        <ul class="row d-flex justify-content-center mt-5" id="legend">
             \${li}
         </ul>
         `;
