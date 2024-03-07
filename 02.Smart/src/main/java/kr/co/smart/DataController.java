@@ -1,8 +1,14 @@
-package kr.co.smart.notice;
+package kr.co.smart;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import kr.co.smart.common.CommonUtility;
+import kr.co.smart.customer.CustomerServiceImp;
+import kr.co.smart.data.DataService;
+import kr.co.smart.data.DataVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -12,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller @RequestMapping("/data")
 public class DataController {
 
     @Autowired private CommonUtility common;
+    @Autowired private DataService service;
 
     @Value("${GeoData_Key}")
     private String key;
@@ -42,6 +51,48 @@ public class DataController {
 
        return responseAPI(url);
 
+
+
+    }
+
+    @RequestMapping("hospital")
+    public void hospital_list(){
+        //공공데이터 포털에서 약국 정보를 조회해 오기
+
+        StringBuffer url = new StringBuffer("https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?");
+        url.append("ServiceKey=").append(key);
+        url.append("&_type=json");
+        url.append("&pageNo=").append(1);
+        url.append("&numOfRows=").append(77279);
+        String jsonData = common.requestAPI(url.toString());
+        JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
+        JsonObject responseBody = jsonObject.getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items");
+        JsonArray items = responseBody.getAsJsonArray("item");
+int cnt =0;
+        for (JsonElement item : items) {
+            JsonObject itemObject = item.getAsJsonObject();
+            String addr = "";
+            String telno = "";
+           if( itemObject.has("telno")){
+
+               telno = itemObject.get("telno").getAsString();
+           }
+            if( itemObject.has("addr")){
+
+                addr = itemObject.get("addr").getAsString();
+            }
+            String name = itemObject.get("yadmNm").getAsString();
+            DataVO vo = new DataVO();
+            vo.setName(name);
+            vo.setContact(telno);
+            vo.setLocation(addr);
+            cnt +=service.insert(vo);
+
+
+        }
+//        List<HashMap<String,Object>> item = items.get("item");
+//        return responseAPI(url);
+        System.out.println(cnt);
 
 
     }
